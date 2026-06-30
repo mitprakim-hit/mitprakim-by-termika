@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@media(max-width:720px){
+  .mtp-nav-desktop{display:none!important;}
+  .mtp-hamburger{display:flex!important;}
+}
+@media(min-width:721px){
+  .mtp-nav-desktop{display:flex!important;}
+  .mtp-hamburger{display:none!important;}
+  .mtp-mobile-menu{display:none!important;}
+}
+</style>
+</helmet>
+
+<div style="direction:rtl;position:sticky;top:0;z-index:80;background:rgba(255,253,246,.97);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid #efe7da;font-family:'Assistant',sans-serif;">
+  <div style="max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+
+    <!-- Logo -->
+    <a href="index.html" style="flex:none;">
+      <img src="assets/logo-mark.png" alt="מתפרקים" style="height:72px;width:auto;display:block;">
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="mtp-nav-desktop" style="align-items:center;flex-wrap:wrap;gap:4px;font-family:'Heebo',sans-serif;font-weight:600;font-size:15px;justify-content:flex-end;">
+      <a href="index.html" style="{{ homeStyle }}">בית</a>
+
+      <div style="position:relative;" onMouseEnter="{{ openGuides }}" onMouseLeave="{{ closeGuides }}">
+        <a href="guides.html" onClick="{{ toggleGuides }}" style="{{ guidesStyle }}">
+          מדריכים
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M6 9l6 6 6-6"></path></svg>
+        </a>
+        <sc-if value="{{ isGuidesOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 8px);right:0;min-width:220px;background:#fff;border:1px solid #f0e6d6;border-radius:16px;box-shadow:0 16px 40px rgba(120,110,90,.18);padding:8px;z-index:200;">
+            <a href="guides.html" style="display:block;padding:11px 14px;border-radius:11px;color:#d65b3b;font-weight:700;font-size:15px;background:#fbeadf;">עוגנים</a>
+            <a href="tips.html" style="display:block;padding:11px 14px;border-radius:11px;color:#5f8a5b;font-weight:700;font-size:15px;margin-top:4px;background:#eaf3e7;">טיפים שווים</a>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="position:relative;" onMouseEnter="{{ openBonus }}" onMouseLeave="{{ closeBonus }}">
+        <a href="assessment.html" onClick="{{ toggleBonus }}" style="{{ bonusStyle }}">
+          בונוסים
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M6 9l6 6 6-6"></path></svg>
+        </a>
+        <sc-if value="{{ isBonusOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 8px);right:0;min-width:220px;background:#fff;border:1px solid #f0e6d6;border-radius:16px;box-shadow:0 16px 40px rgba(120,110,90,.18);padding:8px;z-index:200;">
+            <a href="assessment.html" style="display:block;padding:11px 14px;border-radius:11px;color:#5f7fc0;font-weight:700;font-size:15px;background:#eef3fb;">אבחון ציר הכוח</a>
+            <a href="tigers-book.html" style="display:block;padding:11px 14px;border-radius:11px;color:#c0934e;font-weight:700;font-size:15px;margin-top:4px;background:#fdf4e8;">ילדי הנמרים 🐯</a>
+            <a href="stickers.html" style="display:block;padding:11px 14px;border-radius:11px;color:#a96a8f;font-weight:700;font-size:15px;margin-top:4px;background:#f4e9f0;">מדבקות לילדים</a>
+          </div>
+        </sc-if>
+      </div>
+
+      <a href="about.html" style="{{ aboutStyle }}">עליי</a>
+      <a href="webinar-landing.html" style="display:inline-flex;align-items:center;gap:6px;color:#7790c2;padding:7px 14px;border-radius:11px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#7790c2;display:inline-block;"></span>הרשמה לוובינר
+      </a>
+      <a href="https://wa.me/972544515919" target="_blank" style="color:#fff;background:#d65b3b;padding:8px 16px;border-radius:12px;box-shadow:0 4px 14px rgba(214,91,59,.28);font-size:14px;">ייעוץ חינם</a>
+    </div>
+
+    <!-- Hamburger button (mobile only) -->
+    <button class="mtp-hamburger" onClick="{{ toggleMobile }}" style="display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:90;">
+      <span style="{{ ham1 }}"></span>
+      <span style="{{ ham2 }}"></span>
+      <span style="{{ ham3 }}"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="mtp-mobile-menu" style="background:#fffdf6;border-top:1px solid #efe7da;padding:16px 20px;display:flex;flex-direction:column;gap:6px;">
+      <a href="index.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#3d4a6e;background:#f8f4ef;">🏠 בית</a>
+      <a href="guides.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#d65b3b;background:#fbeadf;">⚓ מדריך העוגנים</a>
+      <a href="assessment.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#5f7fc0;background:#eef3fb;">🔍 אבחון ציר הכוח</a>
+      <a href="tigers-book.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#c0934e;background:#fdf4e8;">🐯 ילדי הנמרים</a>
+      <a href="about.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#3d4a6e;background:#f8f4ef;">👤 עליי</a>
+      <a href="webinar-landing.html" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#7790c2;background:#eef3fb;">📅 הרשמה לוובינר</a>
+      <a href="https://wa.me/972544515919" target="_blank" style="display:block;padding:13px 16px;border-radius:12px;font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:#d65b3b;text-align:center;margin-top:4px;">💬 ייעוץ חינם 15 דקות</a>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:260},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;guides&quot;,&quot;bonus&quot;,&quot;about&quot;,&quot;&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+
+class Component extends DCLogic {
+  state = { menu: null, mobileOpen: false };
+
+  openGuides = () => this.setState({ menu: 'guides' });
+  closeGuides = () => this.setState({ menu: null });
+  toggleGuides = (e) => { if (this.state.menu === 'guides') return; e.preventDefault(); this.setState({ menu: 'guides' }); };
+
+  openBonus = () => this.setState({ menu: 'bonus' });
+  closeBonus = () => this.setState({ menu: null });
+  toggleBonus = (e) => { if (this.state.menu === 'bonus') return; e.preventDefault(); this.setState({ menu: 'bonus' }); };
+
+  toggleMobile = () => this.setState({ mobileOpen: !this.state.mobileOpen });
+
+  renderVals() {
+    const base = 'display:inline-flex;align-items:center;color:#7790c2;padding:7px 14px;border-radius:11px;cursor:pointer;';
+    const act  = 'display:inline-flex;align-items:center;color:#d65b3b;background:#fbeadf;padding:7px 14px;border-radius:11px;cursor:pointer;';
+    const a = this.props.active || '';
+    const { menu, mobileOpen } = this.state;
+    const bar = (rot, op) =>
+      `display:block;width:22px;height:2.5px;background:#3d4a6e;border-radius:2px;transition:transform .2s,opacity .2s;transform:${rot};opacity:${op};`;
+    return {
+      isGuidesOpen: menu === 'guides',
+      openGuides: this.openGuides, closeGuides: this.closeGuides, toggleGuides: this.toggleGuides,
+      isBonusOpen:  menu === 'bonus',
+      openBonus: this.openBonus, closeBonus: this.closeBonus, toggleBonus: this.toggleBonus,
+      mobileOpen,
+      toggleMobile: this.toggleMobile,
+      homeStyle:    a === 'home'   ? act : base,
+      guidesStyle:  a === 'guides' ? act : base,
+      bonusStyle:   a === 'bonus'  ? act : base,
+      aboutStyle:   a === 'about'  ? act : base,
+      ham1: bar(mobileOpen ? 'rotate(45deg) translate(5px,5px)' : 'none', 1),
+      ham2: bar('none', mobileOpen ? 0 : 1),
+      ham3: bar(mobileOpen ? 'rotate(-45deg) translate(5px,-5px)' : 'none', 1),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

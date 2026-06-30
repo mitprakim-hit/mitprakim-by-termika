@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @keyframes giftFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+  @keyframes giftPulse{0%,100%{box-shadow:0 14px 40px rgba(214,91,59,.22)}50%{box-shadow:0 14px 54px rgba(214,91,59,.38)}}
+  @keyframes revealIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="direction:rtl;font-family:'Assistant',sans-serif;">
+  <div style="max-width:880px;margin:0 auto;background:linear-gradient(150deg,#fff6ec 0%,#fdeede 60%,#eef3fb 130%);border:1px solid #f3ddcb;border-radius:28px;padding:46px 30px;text-align:center;overflow:hidden;position:relative;">
+
+    <div style="font-family:'Heebo',sans-serif;font-weight:700;font-size:13px;letter-spacing:3px;color:#7790c2;margin-bottom:10px;">מתנה בשבילכם</div>
+
+    <sc-if value="{{ closed }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <h2 style="font-family:'Heebo',sans-serif;font-weight:800;font-size:30px;line-height:1.3;color:#d65b3b;margin:0 0 8px;">יש לי משהו בשבילכם</h2>
+        <p style="font-size:17px;line-height:1.8;color:#6f7596;margin:0 0 26px;max-width:440px;">הכנתי הפתעה קטנה שיכולה ללוות אתכם בתקופה הזו. לחצו לפתיחה.</p>
+        <button onClick="{{ openBox }}" aria-label="פתיחת ההפתעה" style="cursor:pointer;border:none;background:none;padding:0;animation:giftFloat 3.2s ease-in-out infinite;">
+          <span style="display:inline-flex;width:130px;height:130px;border-radius:26px;background:linear-gradient(145deg,#e8714f,#d65b3b);align-items:center;justify-content:center;animation:giftPulse 2.6s ease-in-out infinite;">
+            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8"></path>
+              <path d="M2 7h20v5H2z"></path>
+              <path d="M12 21V7"></path>
+              <path d="M12 7S10.5 3 8 3a2.5 2.5 0 0 0 0 5h4z"></path>
+              <path d="M12 7s1.5-4 4-4a2.5 2.5 0 0 1 0 5h-4z"></path>
+            </svg>
+          </span>
+        </button>
+        <button onClick="{{ openBox }}" style="margin-top:22px;cursor:pointer;font-family:'Heebo',sans-serif;font-weight:700;font-size:15px;color:#d65b3b;background:#fff;border:1.5px solid #ecc3b2;border-radius:12px;padding:11px 26px;">לפתיחת ההפתעה</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ opened }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:revealIn .5s ease both;display:flex;gap:34px;align-items:center;flex-wrap:wrap;text-align:right;justify-content:center;">
+        <div style="flex:none;width:260px;max-width:80%;">
+          <img src="assets/course-cover.png" alt="צוק התקווה" style="width:100%;height:auto;border-radius:16px;box-shadow:0 14px 36px rgba(120,110,90,.22);display:block;">
+        </div>
+        <div style="flex:1;min-width:260px;">
+          <div style="display:inline-block;font-family:'Heebo',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;color:#5f8a5b;background:#eaf3e7;padding:6px 14px;border-radius:10px;margin-bottom:14px;">קורס דיגיטלי במתנה</div>
+          <h2 style="font-family:'Heebo',sans-serif;font-weight:800;font-size:32px;line-height:1.2;color:#d65b3b;margin:0 0 12px;">צוק התקווה</h2>
+          <p style="font-size:17.5px;line-height:1.85;color:#5f648c;margin:0 0 22px;">מסע קצר על צמיחה מתוך תקופות של משבר, דחק, אובדן ופרידה. הרגע שבו הכאב מתחיל להפוך לכנפיים. בלי תשלום, רק במתנה ממני אליכם.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <a href="gift.dc.html" style="font-family:'Heebo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:#d65b3b;padding:14px 28px;border-radius:14px;box-shadow:0 8px 22px rgba(214,91,59,.28);text-decoration:none;">לקבלת הקורס במתנה ←</a>
+            <button onClick="{{ closeBox }}" style="cursor:pointer;font-family:'Heebo',sans-serif;font-weight:600;font-size:14px;color:#9aa6c0;background:none;border:none;">סגירה</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:420}}">
+class Component extends DCLogic {
+  state = { open:false };
+  openBox = () => this.setState({open:true});
+  closeBox = () => this.setState({open:false});
+  renderVals(){
+    return { closed: !this.state.open, opened: this.state.open, openBox:this.openBox, closeBox:this.closeBox };
+  }
+}
+</script>
+</body>
+</html>

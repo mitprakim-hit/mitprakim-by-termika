@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&family=Assistant:wght@400;500&display=swap" rel="stylesheet">
+</helmet>
+<div style="direction:rtl;background:#faf3e8;border-top:1px solid #efe7da;padding:48px 26px 36px;font-family:'Assistant',sans-serif;">
+  <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start;">
+    <div style="max-width:320px;">
+      <div style="font-family:'Heebo',sans-serif;font-weight:700;font-size:18px;color:#d65b3b;margin-bottom:10px;">מתפרקים</div>
+      <p style="font-size:15px;line-height:1.8;color:#7790c2;margin:0;">ליווי ומעטפת רגשית, הורית וכלכלית לחיים שבין פרק א׳ לפרק ב׳.</p>
+    </div>
+    <div>
+      <div style="font-family:'Heebo',sans-serif;font-weight:700;font-size:14px;color:#d65b3b;margin-bottom:12px;">ניווט</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;">
+        <a href="index.dc.html" style="color:#7790c2;text-decoration:none;">בית</a>
+        <a href="guides.dc.html" style="color:#7790c2;text-decoration:none;">המדריכים</a>
+        <a href="groups.dc.html" style="color:#7790c2;text-decoration:none;">קבוצות תמיכה</a>
+        <a href="about.dc.html" style="color:#7790c2;text-decoration:none;">עליי</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'Heebo',sans-serif;font-weight:700;font-size:14px;color:#d65b3b;margin-bottom:12px;">יצירת קשר</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;">
+        <a href="tel:0544515919" style="color:#7790c2;text-decoration:none;">054-4515919</a>
+        <a href="{{ emailHref }}" style="color:#7790c2;text-decoration:none;">{{ emailText }}</a>
+        <a href="https://instagram.com/avia_kadosh_benhamo" target="_blank" style="color:#7790c2;text-decoration:none;">אינסטגרם</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1080px;margin:28px auto 0;border-top:1px solid #efe7da;padding-top:18px;font-size:13px;color:#b9a892;">מתפרקים · אביה קדוש בן חמו</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+    return {
+      emailText: ["Avia.termika","gmail.com"].join("@"),
+      emailHref: "mailto:" + ["Avia.termika","gmail.com"].join("@")
+    };
+  }
+}
+</script>
+</body>
+</html>
